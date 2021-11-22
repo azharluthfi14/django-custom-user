@@ -1,0 +1,30 @@
+{% extends '__base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <h1>Login</h1>
+    <form method="POST" autocomplete="off">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert mb-3 alert-dismissible fade show alert-{% if message.tags == 'error'%}danger{% else %}{{message.tags}}{% endif %}"
+            role="alert">
+            {{message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="email" class="form-label" aria-required="true">Email address</label>
+            <input type="email" name="email" class="form-control form-control-lg" required id="email">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label" aria-required="true">Password</label>
+            <input type="password" name="password" class="form-control form-control-lg" required id="password">
+        </div>
+        <button class="btn btn-primary btn-lg" type="submit">Log in</button>
+    </form>
+</div>
+
+{% endblock content %}
